@@ -1,0 +1,39 @@
+try:
+    number = int(input("Сколько будет бомб? (4)"))
+except ValueError:
+    print("Вы ввели не число")
+    exit()
+bomb = []
+print("Напишите координаты через пробел (поле 5х5)")
+for k in range(number):
+    print(k+1, ':')
+    try:
+        a, b = (int(i) for i in input().split())
+        if (4<a or 0>a or 4<b or 0>b):
+            print ('Координата вне вне поля. Надо вводить числа от 0 до 4')
+            exit()
+    except ValueError:
+        print("Вы ввели не число")
+        exit()
+    bomb.append([a,b])
+if ():
+    print("Есть повторяющиея координаты")
+    exit()
+
+supper = [['.','.','.','.','.'],['.','.','.','.','.'],['.','.','.','.','.'],\
+     ['.','.','.','.','.'],['.','.','.','.','.']]
+for i in bomb:
+    x,y = i[0],i[1]
+    if supper[x][y] == 'B':
+        print("Есть повторяющиея координаты")
+        exit()
+    supper[x][y] = 'B'
+    for j in [y-1,y,y+1]:
+        for h in [x-1, x, x+1]:
+            try:
+                if (h < 0) or (j<0) or (supper[h][j]=='B'): continue
+            except IndexError: continue
+            if (supper[h][j] == '.'):
+                supper[h][j] = '1'
+            else: supper[h][j] = str(int(supper[h][j]) + 1)
+print(supper)
