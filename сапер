@@ -1,32 +1,36 @@
-try:
-    number = int(input("Сколько будет бомб? (4)"))
-except ValueError:
-    print("Вы ввели не число")
-    exit()
+number = 0
+while number <= 0:
+    try:
+        number = int(input("Сколько будет бомб? (4)"))
+    except ValueError:
+        print("Вы ввели не число")
+        number = 0
+        continue
+    if number <= 0: print('Надо вввести положительное число')
+
 bomb = []
 print("Напишите координаты через пробел (поле 5х5)")
-for k in range(number):
+k = 0
+while (len(bomb) != number):
     print(k+1, ':')
     try:
         a, b = (int(i) for i in input().split())
         if (4<a or 0>a or 4<b or 0>b):
-            print ('Координата вне вне поля. Надо вводить числа от 0 до 4')
-            exit()
+            print ('Координата вне поля. Надо вводить числа от 0 до ' + str(number))
+            continue
     except ValueError:
-        print("Вы ввели не число")
-        exit()
+            print("Вы ввели не число")
+            continue
+    if ([a,b] in bomb):
+        print('Такая координата уже есть')
+        continue
     bomb.append([a,b])
-if ():
-    print("Есть повторяющиея координаты")
-    exit()
+    k += 1
 
 supper = [['.','.','.','.','.'],['.','.','.','.','.'],['.','.','.','.','.'],\
      ['.','.','.','.','.'],['.','.','.','.','.']]
 for i in bomb:
     x,y = i[0],i[1]
-    if supper[x][y] == 'B':
-        print("Есть повторяющиея координаты")
-        exit()
     supper[x][y] = 'B'
     for j in [y-1,y,y+1]:
         for h in [x-1, x, x+1]:
